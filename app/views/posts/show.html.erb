@@ -1,0 +1,76 @@
+<div class="mt-4" id="show_page">
+    <div class="card ml-3 mb-3 mx-auto rounded" style="width: 60rem;">
+      <div class="card-body">
+        <h1 class="card-title"><strong><%= @post.title %></strong></h1>
+
+        <% if current_user == @post.user %>
+          <h6 class="card-subtitle mb-2 text-muted">Posted <%= time_ago_in_words(@post.created_at) %> ago by <%= link_to @post.user.full_name, edit_user_path(current_user)%></h6>
+        <% else %>
+          <h6 class="card-subtitle mb-2 text-muted">Posted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.first_name %> <%= @post.user.last_name %></h6>
+        <% end %>
+
+        <p class="card-text"><%= @post.body %></p>
+        <hr>
+        <% if user_signed_in? %>
+            <small>
+              <%= link_to "Edit", edit_post_path(@post.id) %>
+              |
+              <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Delete this post forever? And all the comments!!"}%>
+            </small>
+        <% end %>
+      </div>
+    </div>
+</div>
+
+<div class="mt-4">
+  <div class="card ml-3 mb-3 mx-auto rounded" style="width: 60rem;">
+      <div class="card-body">
+        <h3><strong>New Comment</strong></h3>
+        <!-- add a comment to database -->
+        <%= form_for [@post, @comment] do |f| %>
+          <p class="form-errors">
+            <%= @comment.errors.full_messages.join(', ') %>
+          </p>
+          <div>
+            <%= f.text_area :body, placeholder: "What's on your mind?", class:"form-control", id:"exampleFormControlTextarea1", cols: 60, rows: 4 %>
+          </div>
+          <%= f.submit "Submit", class:"btn btn-outline-dark mt-3" %>
+        <% end %>
+        <hr>
+        <!-- Displaying all comments associated with the particular post -->
+
+          <h3><strong>Comments</strong></h3>
+          <ul class="comment-list">
+            <% @comments.each do |comment| %>
+            <hr>
+            <li>
+              <p><%= comment.body %><br />
+                <small>
+
+                  <% if current_user == comment.user %>
+                    <strong><%= link_to comment.user.full_name, edit_user_path(current_user) %></strong> commented <%= time_ago_in_words(comment.created_at) %> ago
+                  <% else %>
+                    <strong><%= comment.user.first_name %> <%= comment.user.last_name %></strong> commented <%= time_ago_in_words(comment.created_at) %> ago
+                  <% end %>
+
+                </small>
+
+                <% if user_signed_in? %>
+                |
+                <small>
+                  <%= link_to "Delete", comment_path(comment),
+                    method: :delete,
+                    data: {confirm: "Are you sure?"} %>
+                </small>
+                <% end %>
+
+              </p>
+            </li>
+            <% end %>
+          </ul>
+          <hr>
+
+
+      </div>
+  </div>
+</div>

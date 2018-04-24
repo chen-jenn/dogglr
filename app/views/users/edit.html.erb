@@ -1,0 +1,40 @@
+<div class="mt-4" id="show_page">
+    <div class="card ml-3 mb-3 mx-auto rounded" style="width: 40rem;">
+      <div class="card-body">
+        <h1 class="card-title"><strong>Account</strong></h1>
+        <h6 class="card-subtitle mb-2 text-muted">Change whatever...</h6>
+        <hr>
+
+        <%= form_for @u do |f| %>
+
+            <p class="form-errors">
+              <%= @u.errors.full_messages.join(', ') %>
+            </p>
+            <div class="form-group">
+              <strong><%= f.label :first_name, for:"input1" %></strong><br />
+              <%= f.text_field :first_name, type:"text", class:"form-control", id:"input1" %>
+            </div>
+            <div class="form-group">
+              <strong><%= f.label :last_name, for:"input2" %></strong><br />
+              <%= f.text_field :last_name, type:"text", class:"form-control", id:"input2" %>
+            </div>
+            <div class="form-group">
+              <strong><%= f.label :email, for:"input3" %></strong><br />
+              <%= f.email_field :email, type:"text", class:"form-control", id:"input3" %>
+            </div>
+
+            <%= f.submit "Submit", class:"btn btn-outline-dark" %>
+
+            <% end %>
+            <hr>
+
+            <div class="form-group">
+              <strong><%= label_tag "Password" %></strong>: ************<br />
+
+            </div>
+            <%= link_to "Change Password", change_password_path, class:"btn btn-outline-dark" %>
+
+
+      </div>
+    </div>
+</div>

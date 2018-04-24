@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dogglr</title>
+    <%= csrf_meta_tags %>
+    <link rel="shortcut icon" href="http://lh5.ggpht.com/hyT1S5pScNMReR3JAMYU1g-j8kxSitvoO-PVFtEDNPxiWS_e9cdduOakHveY_rYcJbc=w300"/>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <!-- simple navbar -->
+    <!-- <div>
+    <%= link_to 'All', posts_path %>
+    |
+    <%= link_to 'Add New', new_post_path %>
+    </div> -->
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" style="border-bottom:rgb(87, 98, 117) solid;border-width:2px">
+      <a class="navbar-brand" href="/">
+        <!-- <img src="http://lh5.ggpht.com/hyT1S5pScNMReR3JAMYU1g-j8kxSitvoO-PVFtEDNPxiWS_e9cdduOakHveY_rYcJbc=w300" style="height:50px;width:50px"/>   -->
+        <%= image_tag "dogglr2.png", style:"height:50px;width:150px;" %>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="<%= about_us_path %>">About<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= posts_path %>">Posts<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= new_post_path %>">Add New</a>
+          </li>
+
+          <% if current_user.present?  %>
+          <li class="nav-item">
+            <%= link_to 'Account', edit_user_path(current_user), class:"nav-link", method:"get"%>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign Out', session_path, class:"nav-link", method:"delete" %>
+          </li>
+
+          <% else %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= new_session_path %>">Sign In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= new_user_path %>">Sign Up</a>
+          </li>
+          <% end %>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="No action..." aria-label="Search">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <% flash.each do |type, msg| %>
+      <div class="alert alert-<%= type == "alert" ? "danger" : "success" %> alert-dismissible fade show" role="alert">
+        <%= msg %>
+
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </body>
+</html>

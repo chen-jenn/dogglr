@@ -1,0 +1,29 @@
+
+<div class="mt-4" id="show_page">
+    <div class="card ml-3 mb-3 mx-auto rounded" style="width: 60rem;">
+      <div class="card-body">
+        <h1 class="card-title"><strong>Add Something!</strong></h1>
+        <h6 class="card-subtitle mb-2 text-muted">Something fancy? Boring? A joke? You name it</h6>
+        <hr>
+        <!-- fancy form here -->
+        <%= form_for @post do |f| %>
+
+            <p class="form-errors">
+              <%= @post.errors.full_messages.join(', ') %>
+            </p>
+            <div class="form-group">
+              <strong><%= f.label :title, for:"input1" %></strong><br />
+              <%= f.text_field :title, type:"text", class:"form-control", id:"input1" %>
+            </div>
+
+            <div class="form-group">
+              <strong><%= f.label :body, 'Content', for:"textarea" %></strong><br />
+              <%= f.text_area :body, placeholder:"What'chu thinking about?", class:"form-control", id:"textarea", rows:"4" %>
+            </div>
+
+            <%= f.submit "Submit", class:"btn btn-outline-dark" %>
+
+        <% end %>
+      </div>
+    </div>
+</div>

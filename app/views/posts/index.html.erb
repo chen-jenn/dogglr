@@ -1,0 +1,27 @@
+<h1 id="just_everything">Just. Everything.</h1>
+<!-- <div>
+  <% @posts.each do |post| %>
+    <%= link_to post.title, post_path(post.id), class: "ml-3" %><br />
+    <small class="ml-3 mt-3">Added <%= time_ago_in_words(post.created_at) %> ago</small>
+    <hr>
+  <% end  %>
+</div> -->
+
+<div class="mt-4" id="show_page">
+<% @posts.each do |post| %>
+  <div class="card ml-3 mb-3 mx-auto" style="width: 50rem;">
+    <div class="card-body">
+      <h5 class="card-title"><strong><%= link_to post.title, post_path(post.id), id:"index_title" %></strong></h5>
+
+      <% if current_user == post.user %>
+      <h6 class="card-subtitle mb-2 text-muted">Added <%= time_ago_in_words(post.created_at) %> ago by <%= link_to post.user.full_name, edit_user_path(current_user) %></h6>
+
+      <% else %>
+      <h6 class="card-subtitle mb-2 text-muted">Added <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.first_name %> <%= post.user.last_name %></h6>
+      <% end %>
+
+      <p class="card-text"><%= post.body %></p>
+    </div>
+  </div>
+<% end %>
+</div>

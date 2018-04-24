@@ -1,0 +1,39 @@
+// Put your custom styles here
+
+body{
+  padding-top: 75px;
+  background-color: #35465c;
+}
+
+
+#just_everything{
+  color:white;
+  padding-left: 8px;
+  padding-top: 5px;
+}
+
+.form-errors{
+  color: red;
+}
+
+.comment-list{
+  list-style: none;
+}
+
+a{
+  color: darkgray;
+}
+
+a:hover{
+  text-decoration: none;
+  color:magenta;
+}
+
+#index_title{
+  color: rgb(59, 59, 59);
+}
+
+#index_title:hover{
+  text-decoration: none;
+  color:magenta;
+}
